@@ -1,9 +1,7 @@
 from os import environ
 import discord
-from dotenv import load_dotenv
 import random
 
-load_dotenv()
 TOKEN = environ['DISCORD']
 
 client = discord.Client()
