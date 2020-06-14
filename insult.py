@@ -16,14 +16,28 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print("IN HERE")
     if message.author == client.user:
         return
     insultToSend = random.choice(insults).strip()
     if message.content.startswith('!insult'):
-        print('SENDING')
-        name = message.content.split(' ')[1]
-        response = "Hey "+name+", "+insultToSend
+        name = None
+        if ' ' in message.content:
+            name = message.content.split()[1]
+        if name:
+            if name != 'me':
+                response = "Hey "+name+", "+insultToSend
+            if name == 'me':
+                response = "Hey "+message.author+", "+insultToSend
+            if name == 'yourself':
+                response = "Hey Insult Bot, "+insultToSend
+        else:
+            members = message.guild.members
+            memberList = []
+            for member in members:
+                if not member.bot:
+                    memberList.append(member.id)
+            person = random.choice(memberList)
+            response = "Hey <@"+str(person)+">, "+insultToSend
         await message.channel.send(response)
 
 client.run(TOKEN)
