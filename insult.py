@@ -18,16 +18,17 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.content.startswith('!'):
-        if message.content.startswith('!insult help'):
+    msg = message.content.strip()
+    if msg.startswith('!'):
+        if msg.startswith('!insult help'):
             response = '''
             Bot Commands:\n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself
             '''
-        elif message.content.startswith('!insult'):
+        elif msg.startswith('!insult'):
             insultToSend = random.choice(insults).strip()
-            name = None
-            if ' ' in message.content:
-                name = message.content.split()[1]
+            name = ''
+            if ' ' in msg:
+                name = msg.split()[1]
             if len(name)>0:
                 if name != 'me':
                     response = "Hey "+name+", "+insultToSend
