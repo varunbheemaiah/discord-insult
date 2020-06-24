@@ -10,9 +10,19 @@ insultFile = open('static/insults.txt')
 insults = list(insultFile)
 insultFile.close()
 
+def getInsult():
+    return random.choice(insults).strip()
+
 @client.event
 async def on_ready():
     print(f'{client.user} has connected')
+
+@client.event
+async def on_member_join(member):
+    response = "Welcome <@"+str(member.id)+">, "+getInsult()
+    for channel in member.guild.channels:
+        if channel.name == 'general':
+            await channel.send(response)
 
 @client.event
 async def on_message(message):
@@ -25,7 +35,7 @@ async def on_message(message):
             Bot Commands:\n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself
             '''
         elif msg.startswith('!insult'):
-            insultToSend = random.choice(insults).strip()
+            insultToSend = getInsult()
             name = ''
             if ' ' in msg:
                 name = msg.split()[1]
