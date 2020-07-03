@@ -1,6 +1,7 @@
 from os import environ
 import discord
 import random
+from textblob import TextBlob
 
 TOKEN = environ['DISCORD']
 
@@ -9,6 +10,14 @@ client = discord.Client()
 insultFile = open('static/insults.txt')
 insults = list(insultFile)
 insultFile.close()
+
+comebacksFile = open('static/comebacks.txt')
+comebacks = list(comebacksFile)
+comebacksFile.close()
+
+kissassFile = open('static/kissass.txt')
+kissass = list(kissassFile)
+kissassFile.close()
 
 def getInsult():
     return random.choice(insults).strip()
@@ -57,5 +66,13 @@ async def on_message(message):
         else:
             response = "Invalid Command. Please type '!insult help' for a list of commands"
         await message.channel.send(response)
+    elif client.user in message.mentions:
+        messageAnalysis = TextBlob(msg)
+        sentimentValue = messageAnalysis.sentiment.polarity
+        if sentimentValue > 0.5:
+            response = random.choice(kissass).strip()
+        else:
+            response = random.choice(comebacks).strip()
+        await message.channel.send(response) 
 
 client.run(TOKEN)
