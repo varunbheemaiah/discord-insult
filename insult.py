@@ -1,5 +1,7 @@
 from os import environ
 import discord
+from discord.ext import commands
+from discord.ext.commands.cooldowns import BucketType
 import random
 from textblob import TextBlob
 
@@ -26,14 +28,15 @@ def getInsult():
 async def on_ready():
     print(f'{client.user} has connected')
 
-@client.event
-async def on_member_join(member):
-    response = "Welcome <@"+str(member.id)+">, "+getInsult()
-    for channel in member.guild.channels:
-        if channel.name == 'general':
-            await channel.send(response)
+# @client.event
+# async def on_member_join(member):
+#     response = "Welcome <@"+str(member.id)+">, "+getInsult()
+#     for channel in member.guild.channels:
+#         if channel.name == 'general':
+#             await channel.send(response)
 
 @client.event
+@commands.cooldown(1, 300, commands.BucketType.user)
 async def on_message(message):
     if message.author == client.user:
         return
