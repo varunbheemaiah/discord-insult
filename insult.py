@@ -89,7 +89,7 @@ async def on_message(message):
 					if not member.bot:
 						memberList.append(member.id)
 				person = random.choice(memberList)
-				response = "Hey <@"+str(person)+">, "+insultToSend
+				response = "Hey <@"+str(person)+">, "+complimentToSend
 		else:
 			response = "Invalid Command. Please type '!insult help' for a list of commands"
 		await message.channel.send(response)
