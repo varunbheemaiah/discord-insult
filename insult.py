@@ -56,7 +56,7 @@ async def on_message(message):
 	if msg.startswith('!'):
 		if msg.startswith('!insult help'):
 			response = '''
-			Bot Commands: \n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself
+			Bot Commands: \n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself\n!joke:Cracks a joke\n
 			'''
 		elif msg.startswith('!insult'):
 			insultToSend = getInsult()
