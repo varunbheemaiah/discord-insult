@@ -34,7 +34,7 @@ def getCompliment():
 	return random.choice(compliments).strip()
 
 def getJoke():
-    return random.choice(jokes).strip()
+	return random.choice(jokes).strip()
 
 @client.event
 async def on_ready():
@@ -78,20 +78,29 @@ async def on_message(message):
 						memberList.append(member.id)
 				person = random.choice(memberList)
 				response = "Hey <@"+str(person)+">, "+insultToSend
-        
-    elif msg.startswith('!joke'):
-            joke = getJoke()
-            name = ''
-            if ' ' in msg:
-                name = msg.split()[1]
-            if len(name)>0:
-                if name != 'me':
-                    response = "Hey "+name+", "+joke
-                if name == 'me':
-                    response = "Hey <@"+str(message.author.id)+">, "+joke
-                if name == 'yourself':
-                    response = "Hey Insult Bot, "+joke
-                    
+		
+		elif msg.startswith('!joke'):
+			joke = getJoke()
+			name = ''
+			if ' ' in msg:
+				name = msg.split()[1]
+			if len(name)>0:
+				if name != 'me':
+					response = "Hey "+name+", "+joke
+				if name == 'me':
+					response = "Hey <@"+str(message.author.id)+">, "+joke
+				if name == 'yourself':
+					response = "Hey Insult Bot, "+joke
+			else:
+				members = message.guild.members
+				memberList = []
+				for member in members:
+					if not member.bot:
+						memberList.append(member.id)
+				print(memberList)
+				person = random.choice(memberList)
+				response = "Hey <@"+str(person)+">, " + joke
+
 		elif msg.startswith("!compliment"):
 			complimentToSend = getCompliment()
 			name = ''
