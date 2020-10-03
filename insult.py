@@ -47,17 +47,22 @@ async def on_ready():
 #         if channel.name == 'general':
 #             await channel.send(response)
 
+botHelp = 'Hey, i am an **interactive insult bot**. Feel free to abuse others and yourself with the following commands.\nBot Commands: \n- **!insult**: Insult a random person on the server\n- **!insult <name>**: Insults person with name <name>.\n- **!insult me**: Insults you\n- **!insult yourself**: Insults itself\n- **!joke**:Cracks a joke\nOptionally all commands accept a "tts" parameter at the end. this results in a text to speech insult'
+
 @client.event
 @commands.cooldown(1, 300, commands.BucketType.user)
 async def on_message(message):
 	if message.author == client.user:
 		return
 	msg = message.content.strip()
+	tts = True if ' ' in msg and "tts" in msg.split(" ") else False
 	if msg.startswith('!'):
 		if msg.startswith('!insult help'):
-			response = '''
-			Bot Commands: \n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself\n!joke:Cracks a joke\n
-			'''
+			# response = '''
+			# Bot Commands: \n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself\n!joke:Cracks a joke\n
+			# '''
+			embed = discord.Embed(title="Insult Help", color=0x2196F3)
+			embed.description = botHelp
 		elif msg.startswith('!insult'):
 			insultToSend = getInsult()
 			name = ''
@@ -69,7 +74,8 @@ async def on_message(message):
 				if name == 'me':
 					response = "Hey <@"+str(message.author.id)+">, "+insultToSend
 				if name == 'yourself':
-					response = "Hey Insult Bot, "+insultToSend
+					# response = "Hey Insult Bot, "+insultToSend
+					response = "Hey <@"+str(client.user.id)+">, "+insultToSend
 			else:
 				members = message.guild.members
 				memberList = []
@@ -122,15 +128,26 @@ async def on_message(message):
 				person = random.choice(memberList)
 				response = "Hey <@"+str(person)+">, "+complimentToSend
 		else:
-			response = "Invalid Command. Please type '!insult help' for a list of commands"
-		await message.channel.send(response)
+			# response = "Invalid Command. Please type '!insult help' for a list of commands"
+			embed = discord.Embed(title="Invalid command. try one of these", color=0x2196F3)
+			embed.description = botHelp
+		await message.delete()
+		try:
+			newmessage = await message.channel.send(embed=embed)
+			await newmessage.delete(delay=10)
+		except NameError:
+			await message.channel.send(response, tts=tts)
 	elif client.user in message.mentions:
+		await message.add_reaction('🇸')
+		await message.add_reaction('🇹')
+		await message.add_reaction('🇫')
+		await message.add_reaction('🇺')
 		messageAnalysis = TextBlob(msg)
 		sentimentValue = messageAnalysis.sentiment.polarity
 		if sentimentValue > 0.5:
 			response = random.choice(kissass).strip()
 		else:
 			response = random.choice(comebacks).strip()
-		await message.channel.send(response) 
+		await message.channel.send("Hey "+str(message.author.mention)+", "+response) 
 
 client.run(TOKEN)
