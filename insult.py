@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 import random
+import requests
 from textblob import TextBlob
 
 TOKEN = environ['DISCORD']
@@ -57,12 +58,14 @@ async def on_message(message):
 	msg = message.content.strip()
 	tts = True if ' ' in msg and "tts" in msg.split(" ") else False
 	if msg.startswith('!'):
+
 		if msg.startswith('!insult help'):
-			# response = '''
-			# Bot Commands: \n!insult: Insult a random person on the server\n!insult <name>: Insults person with name <name>.\n!insult me: Insults you\n!insult yourself: Insults itself\n!joke:Cracks a joke\n
-			# '''
-			embed = discord.Embed(title="Insult Help", color=0x2196F3)
+      embed = discord.Embed(title="Insult Help", color=0x2196F3)
 			embed.description = botHelp
+		elif msg.startswith('!darkjoke'):
+			r = requests.get("https://v2.jokeapi.dev/joke/Dark?type=twopart")
+			j=r.json()
+			response = j['setup'] +'\n ' + j['delivery']
 		elif msg.startswith('!insult'):
 			insultToSend = getInsult()
 			name = ''
