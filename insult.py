@@ -60,7 +60,7 @@ async def on_message(message):
 	if msg.startswith('!'):
 
 		if msg.startswith('!insult help'):
-      embed = discord.Embed(title="Insult Help", color=0x2196F3)
+      		embed = discord.Embed(title="Insult Help", color=0x2196F3)
 			embed.description = botHelp
 		elif msg.startswith('!darkjoke'):
 			r = requests.get("https://v2.jokeapi.dev/joke/Dark?type=twopart")
