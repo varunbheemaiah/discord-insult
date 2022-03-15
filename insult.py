@@ -51,7 +51,24 @@ async def on_ready():
 #         if channel.name == 'general':
 #             await channel.send(response)
 
-botHelp = 'Hey, i am an **interactive insult bot**. Feel free to abuse others and yourself with the following commands.\nBot Commands: \n- **!insult**: Insult a random person on the server\n- **!insult <name>**: Insults person with name <name>.\n- **!insult me**: Insults you\n- **!insult yourself**: Insults itself\n- **!joke**:Cracks a joke\nOptionally all commands accept a "tts" parameter at the end. this results in a text to speech insult'
+botHelp = '''Hey, i am an **interactive bot**. Feel free to enjoy the following commands.\n
+Bot Commands: \n
+**Insults**
+- **!insult**: Insult a random person on the server\n
+- **!insult <name>**: Insults person with name <name>.\n
+- **!insult me**: Insults you\n
+- **!insult yourself**: Insults itself\n\n
+
+**Compliment**
+- **!compliment**: Compliment a random person on the server\n
+- **!compliment <name>**: Compliments person with name <name>.\n
+- **!compliment me**: Compliments you\n
+- **!compliment yourself**: Compliments itself\n\n
+
+**Jokes**
+- **!joke**: Cracks a joke\n
+- **!darkjoke**: Cracks a dark joke\n\n
+Optionally all commands accept a "tts" parameter at the end. this results in a text to speech insult'''
 
 @client.event
 @commands.cooldown(1, 300, commands.BucketType.user)
