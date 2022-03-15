@@ -58,23 +58,23 @@ print("RUNNING")
 #             await channel.send(response)
 
 botHelp = '''Hey, i am an **interactive bot**. Feel free to enjoy the following commands.\n
-Bot Commands: \n
+**Bot Commands:** \n
 **Insults**
-- **!insult random**: Insult a random person on the server\n
-- **!insult <name>**: Insults person with name <name>.\n
-- **!insult me**: Insults you\n
-- **!insult yourself**: Insults itself\n
-You can add 'shakespearean' to any insult command to make the insult exotic
+- **!insult random**: Insult a random person on the server
+- **!insult <name>**: Insults person with name <name>.
+- **!insult me**: Insults you
+- **!insult yourself**: Insults itself
+You can add 'shakespearean' to any insult command to make the insult exotic\n
 
 **Compliment**
-- **!compliment**: Compliment a random person on the server\n
-- **!compliment <name>**: Compliments person with name <name>.\n
-- **!compliment me**: Compliments you\n
-- **!compliment yourself**: Compliments itself\n\n
+- **!compliment**: Compliment a random person on the server
+- **!compliment <name>**: Compliments person with name <name>.
+- **!compliment me**: Compliments you
+- **!compliment yourself**: Compliments itself\n
 
 **Jokes**
-- **!joke**: Cracks a joke\n
-- **!darkjoke**: Cracks a dark joke\n\n
+- **!joke**: Cracks a joke
+- **!darkjoke**: Cracks a dark joke\n
 Optionally all commands accept a "tts" parameter at the end. this results in a text to speech insult'''
 
 @client.event
