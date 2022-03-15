@@ -28,6 +28,8 @@ with open("static/kissass.txt","r") as kissassFile:
 with open("static/compliments.txt",'r') as complimentsFile:
 	compliments = list(complimentsFile)
 
+print("RUNNING")
+
 def getInsult():
 	return random.choice(insults).strip()
 
