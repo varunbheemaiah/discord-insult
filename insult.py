@@ -16,7 +16,7 @@ client = discord.Client()
 with open("static/insults.txt","r") as insultFile:
 	insults = list(insultFile)
 
-with open('static/shakespearean.txt', r) as shakespeare:
+with open('static/shakespearean.txt', "r") as shakespeare:
 	shakespeareInsults = list(shakespeare)
 
 jokesFile = open('static/jokes.txt')
