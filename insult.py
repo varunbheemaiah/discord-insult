@@ -86,7 +86,7 @@ async def on_message(message):
 	tts = True if ' ' in msg and "tts" in msg.split(" ") else False
 	if msg.startswith('!'):
 
-		if msg.startswith('!insult help'):
+		if msg.startswith('!vb help'):
 			embed = discord.Embed(title="Insult Help", color=0x2196F3)
 			embed.description = botHelp
 		elif msg.startswith('!darkjoke'):
