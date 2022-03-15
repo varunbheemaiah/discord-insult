@@ -169,7 +169,7 @@ async def on_message(message):
 		await message.delete()
 		try:
 			newmessage = await message.channel.send(embed=embed)
-			await newmessage.delete(delay=10)
+			# await newmessage.delete(delay=10)
 		except NameError:
 			await message.channel.send(response, tts=tts)
 	elif client.user in message.mentions:
