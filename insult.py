@@ -5,8 +5,9 @@ from discord.ext.commands.cooldowns import BucketType
 import random
 import requests
 from textblob import TextBlob
+import sys
 
-TOKEN = environ['DISCORD']
+TOKEN = sys.argv[1]
 
 client = discord.Client()
 
