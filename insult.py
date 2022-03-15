@@ -60,7 +60,7 @@ print("RUNNING")
 botHelp = '''Hey, i am an **interactive bot**. Feel free to enjoy the following commands.\n
 Bot Commands: \n
 **Insults**
-- **!insult**: Insult a random person on the server\n
+- **!insult random**: Insult a random person on the server\n
 - **!insult <name>**: Insults person with name <name>.\n
 - **!insult me**: Insults you\n
 - **!insult yourself**: Insults itself\n
@@ -109,14 +109,16 @@ async def on_message(message):
 				if name == 'yourself':
 					# response = "Hey Insult Bot, "+insultToSend
 					response = "Hey <@"+str(client.user.id)+">, "+insultToSend
+				if name == 'random':
+					members = message.guild.members
+					memberList = []
+					for member in members:
+						if not member.bot:
+							memberList.append(member.id)
+					person = random.choice(memberList)
+					response = "Hey <@"+str(person)+">, "+insultToSend
 			else:
-				members = message.guild.members
-				memberList = []
-				for member in members:
-					if not member.bot:
-						memberList.append(member.id)
-				person = random.choice(memberList)
-				response = "Hey <@"+str(person)+">, "+insultToSend
+				response = "Please specify whom I should insult"
 		
 		elif msg.startswith('!joke'):
 			joke = getJoke()
