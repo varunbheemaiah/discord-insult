@@ -16,6 +16,9 @@ client = discord.Client()
 with open("static/insults.txt","r") as insultFile:
 	insults = list(insultFile)
 
+with open('static/shakespearean.txt', r) as shakespeare:
+	shakespeareInsults = list(shakespeare)
+
 jokesFile = open('static/jokes.txt')
 jokes = list(jokesFile)
 jokesFile.close()
@@ -29,10 +32,11 @@ with open("static/kissass.txt","r") as kissassFile:
 with open("static/compliments.txt",'r') as complimentsFile:
 	compliments = list(complimentsFile)
 
-print("RUNNING")
-
 def getInsult():
 	return random.choice(insults).strip()
+
+def getShakespeareanInsult():
+	return random.choice(shakespeareInsults).strip()
 
 def getCompliment():
 	return random.choice(compliments).strip()
@@ -43,6 +47,8 @@ def getJoke():
 @client.event
 async def on_ready():
 	print(f'{client.user} has connected')
+
+print("RUNNING")
 
 # @client.event
 # async def on_member_join(member):
@@ -57,7 +63,8 @@ Bot Commands: \n
 - **!insult**: Insult a random person on the server\n
 - **!insult <name>**: Insults person with name <name>.\n
 - **!insult me**: Insults you\n
-- **!insult yourself**: Insults itself\n\n
+- **!insult yourself**: Insults itself\n
+You can add 'shakespearean' to any insult command to make the insult exotic
 
 **Compliment**
 - **!compliment**: Compliment a random person on the server\n
@@ -87,7 +94,10 @@ async def on_message(message):
 			j=r.json()
 			response = j['setup'] +'\n ' + j['delivery']
 		elif msg.startswith('!insult'):
-			insultToSend = getInsult()
+			if 'shakespearean' in msg:
+				insultToSend = getShakespeareanInsult()
+			else:
+				insultToSend = getInsult()
 			name = ''
 			if ' ' in msg:
 				name = msg.split()[1]
@@ -171,6 +181,7 @@ async def on_message(message):
 			response = random.choice(kissass).strip()
 		else:
 			response = random.choice(comebacks).strip()
+
 		await message.channel.send("Hey "+str(message.author.mention)+", "+response) 
 
 client.run(TOKEN)
