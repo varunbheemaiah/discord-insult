@@ -20,7 +20,7 @@ print("RUNNING")
 @client.event
 @commands.cooldown(1, 300, commands.BucketType.user)
 async def on_message(message):
-	if message.author == client.user:
+	if message.author.bot:
 		return
 	msg = message.content.strip()
 	tts = True if ' ' in msg and "tts" in msg.split(" ") else False
