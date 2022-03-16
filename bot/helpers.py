@@ -2,25 +2,25 @@ from bot.constants import *
 import random
 import requests
 
-def getInsult():
+def getInsultToSend():
 	return random.choice(insults).strip()
 
-def getShakespeareanInsult():
+def getShakespeareanInsultToSend():
 	return random.choice(shakespeareInsults).strip()
 
-def getCompliment():
+def getComplimentToSend():
 	return random.choice(compliments).strip()
 
-def getJoke():
+def getJokeToSend():
 	return random.choice(jokes).strip()
 
-def getComeback():
+def getComebackToSend():
 	return random.choice(comebacks).strip()
 
-def getKissass():
+def getKissassToSend():
 	return random.choice(kissass).strip()
 
-def getDarkJoke():
+def getDarkJokeToSend():
 	r = requests.get("https://v2.jokeapi.dev/joke/Dark?type=twopart")
 	joke = r.json()
 	return joke['setup'] +'\n ' + joke['delivery']
@@ -30,9 +30,9 @@ def getInsult(client, message):
 	msg = message.content.strip()
 
 	if 'shakespearean' in msg:
-		insultToSend = getShakespeareanInsult()
+		insultToSend = getShakespeareanInsultToSend()
 	else:
-		insultToSend = getInsult()
+		insultToSend = getInsultToSend()
 	name = ''
 	if ' ' in msg:
 		name = msg.split()[1]
@@ -61,7 +61,7 @@ def getJoke(client, message):
 
 	msg = message.content.strip()
 
-	joke = getJoke()
+	joke = getJokeToSend()
 	name = ''
 	if ' ' in msg:
 		name = msg.split()[1]
@@ -88,7 +88,7 @@ def getCompliment(client, message):
 
 	msg = message.content.strip()
 
-	complimentToSend = getCompliment()
+	complimentToSend = getComplimentToSend()
 	name = ''
 	if ' ' in msg:
 		name = msg.split()[1]
