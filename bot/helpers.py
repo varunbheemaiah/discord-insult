@@ -84,6 +84,33 @@ def getJoke(client, message):
 	
 	return response
 
+def getDarkJoke(client, message):
+
+	msg = message.content.strip()
+
+	joke = getDarkJokeToSend()
+	name = ''
+	if ' ' in msg:
+		name = msg.split()[1]
+	if len(name)>0:
+		if name != 'me':
+			response = "Hey "+name+", "+joke
+		if name == 'me':
+			response = "Hey <@"+str(message.author.id)+">, "+joke
+		if name == 'yourself':
+			response = "Hey Insult Bot, "+joke
+	else:
+		members = message.guild.members
+		memberList = []
+		for member in members:
+			if not member.bot:
+				memberList.append(member.id)
+		print(memberList)
+		person = random.choice(memberList)
+		response = "Hey <@"+str(person)+">, " + joke
+	
+	return response
+
 def getCompliment(client, message):
 
 	msg = message.content.strip()

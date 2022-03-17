@@ -31,7 +31,7 @@ async def on_message(message):
 			embed.description = botHelp
 			
 		elif msg.startswith('!darkjoke'):
-			response = getDarkJoke()
+			response = getDarkJoke(client, message)
 		
 		elif msg.startswith('!insult'):
 			response = getInsult(client, message)
