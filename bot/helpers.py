@@ -37,8 +37,6 @@ def getInsult(client, message):
 	if ' ' in msg:
 		name = msg.split()[1]
 	if len(name)>0:
-		if name != 'me':
-			response = "Hey "+name+", "+insultToSend
 		if name == 'me':
 			response = "Hey <@"+str(message.author.id)+">, "+insultToSend
 		if name == 'yourself':
@@ -86,8 +84,6 @@ def getDarkJoke(client, message):
 	if ' ' in msg:
 		name = msg.split()[1]
 	if len(name)>0:
-		if name != 'me':
-			response = "Hey "+name+", "+joke
 		if name == 'me':
 			response = "Hey <@"+str(message.author.id)+">, "+joke
 		if name == 'yourself':
@@ -106,8 +102,6 @@ def getCompliment(client, message):
 	if ' ' in msg:
 		name = msg.split()[1]
 	if len(name)>0:
-		if name != 'me':
-			response = "Hey "+name+", "+complimentToSend
 		if name == 'me':
 			response = "Hey <@"+str(message.author.id)+">, "+complimentToSend
 		if name == 'yourself':
