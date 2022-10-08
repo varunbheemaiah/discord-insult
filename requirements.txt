@@ -19,7 +19,7 @@ six==1.15.0
 textblob==0.15.3
 toml==0.10.1
 tqdm==4.47.0
-websockets==8.1
+websockets==9.1
 wrapt==1.12.1
 yarl==1.4.2
 requests==2.25.1
