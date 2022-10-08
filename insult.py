@@ -31,16 +31,25 @@ async def on_message(message):
 			embed.description = botHelp
 			
 		elif msg.startswith('!darkjoke'):
-			response = getDarkJoke(client, message)
+			response = getDarkJoke(client, msg)
 		
 		elif msg.startswith('!insult'):
-			response = getInsult(client, message)
+			response = getInsult(client, msg)
 		
 		elif msg.startswith('!joke'):
-			response = getJoke(client, message)
+			response = getJoke(client, msg)
 
 		elif msg.startswith("!compliment"):
-			response = getCompliment(client, message)
+			response = getCompliment(client, msg)
+
+		elif msg.startswith("!tosscoin"):
+			response = tossCoin()
+
+		elif msg.startswith("!rolldie"):
+			response = rollDie()
+
+		elif msg.startswith("!rolld20"):
+			response = rolld20()
 
 		else:
 			# response = "Invalid Command. Please type '!insult help' for a list of commands"

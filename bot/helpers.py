@@ -1,3 +1,4 @@
+from re import L
 from bot.constants import *
 import random
 import requests
@@ -116,3 +117,12 @@ def getCompliment(client, message):
 		response = "Hey <@"+str(person)+">, "+complimentToSend
 
 	return response
+
+def tossCoin():
+	return random.choice(["Heads", "Tails"])
+
+def rollDie():
+	return random.randint(1,6)
+
+def rolld20():
+	return random.randint(1,20)
